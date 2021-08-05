@@ -1,17 +1,14 @@
 const newBookBtn = document.querySelector(".new-book-btn");
 const modal = document.querySelector(".modal");
-const addBookBtn = document.getElementById("add-book-btn");
+// const addBookBtn = document.getElementById("add-book-btn");
+const form = document.getElementById("form");
 const titleInputElement = document.getElementById("title");
 const authorInputElement = document.getElementById("author");
 const pagesInputElement = document.getElementById("pages");
 const readInputElement = document.getElementById("read");
 const booksContainer = document.querySelector(".books-container");
 
-const book = new Book("Secret Home", "Jackson", 123, "yes");
-const book2 = new Book("House", "Jude", 143, "yes");
-const book3 = new Book("Building", "Jack", 73, "no");
-
-let myLibrary = [book, book2, book3];
+let myLibrary = [];
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -26,10 +23,8 @@ function addBookToLibrary() {
 }
 
 function displayBook(array) {
-  for (let i = 0; i < array.length; i++) {
-    let bookCard = createBookCardElement(array[i]);
-    booksContainer.append(bookCard);
-  }
+  let bookCard = createBookCardElement(array[array.length - 1]);
+  booksContainer.append(bookCard);
 }
 
 function createBookCardElement(book) {
@@ -54,7 +49,12 @@ function createBookCardElement(book) {
   return bookCardDiv;
 }
 
-displayBook(myLibrary);
+function resetForm() {
+  titleInputElement.value = "";
+  authorInputElement.value = "";
+  pagesInputElement.value = "";
+  readInputElement.checked = false;
+}
 
 newBookBtn.addEventListener("click", function () {
   modal.style.display = "block";
@@ -64,4 +64,12 @@ window.addEventListener("click", function (e) {
   if (e.target == modal) {
     modal.style.display = "none";
   }
+});
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  addBookToLibrary();
+  displayBook(myLibrary);
+  resetForm();
+  modal.style.display = "none";
 });
