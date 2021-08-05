@@ -25,7 +25,8 @@ function addBookToLibrary() {
 
 function displayBook(array) {
   for (let i = 0; i < array.length; i++) {
-    createBookCardElement(array[i]);
+    let bookCard = createBookCardElement(array[i]);
+    document.body.append(bookCard);
   }
 }
 
@@ -47,12 +48,11 @@ function createBookCardElement(book) {
   bookCardDiv.append(bookAuthor);
   bookCardDiv.append(bookPages);
   bookCardDiv.append(bookRead);
-  document.body.append(bookCardDiv);
+
+  return bookCardDiv;
 }
 
-// createBookCardElement(book);
-
-displayBook(myLibrary);
+// displayBook(myLibrary);
 
 // addBookBtn.addEventListener("click", function (e) {
 //   e.preventDefault();

@@ -4,11 +4,40 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Library</title>
   </head>
   <body>
-    <div class="book-container">
+    <div class="container">
+      <header>
+        <h1>Library</h1>
+      </header>
+
+      <main>
+        <button class="add-book-btn">Add Book</button>
+
+        <div class="books-container">
+          <div class="book-card">
+            <p>Secret Home</p>
+            <p>Jackson</p>
+            <p>123</p>
+            <p>Yes</p>
+          </div>
+
+          <div class="book-card">
+            <p>Secret Home</p>
+            <p>Jackson</p>
+            <p>123</p>
+            <p>Yes</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- <div class="book-container">
       <form action="/">
         <input type="text" name="title" id="title" placeholder="Title" />
         <input type="text" name="author" id="author" placeholder="Author" />
@@ -20,9 +49,7 @@
 
         <input type="submit" value="Add Book" id="submit" />
       </form>
-    </div>
-
-    <div class="table"></div>
+    </div> -->
   </body>
   <script src="script.js"></script>
 </html>
