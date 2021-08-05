@@ -3,7 +3,7 @@ const authorInputElement = document.getElementById("author");
 const pagesInputElement = document.getElementById("pages");
 const readInputElement = document.getElementById("read");
 const addBookBtn = document.getElementById("submit");
-const table = document.querySelector(".table");
+const booksContainer = document.querySelector(".books-container");
 
 const book = new Book("Secret Home", "Jackson", 123, "yes");
 const book2 = new Book("House", "Jude", 143, "yes");
@@ -26,7 +26,7 @@ function addBookToLibrary() {
 function displayBook(array) {
   for (let i = 0; i < array.length; i++) {
     let bookCard = createBookCardElement(array[i]);
-    document.body.append(bookCard);
+    booksContainer.append(bookCard);
   }
 }
 
@@ -37,7 +37,7 @@ function createBookCardElement(book) {
   const bookPages = document.createElement("p");
   const bookRead = document.createElement("p");
 
-  bookCardDiv.classList.add("book-container");
+  bookCardDiv.classList.add("book-card");
 
   bookTitle.textContent = book.title;
   bookAuthor.textContent = book.author;
@@ -52,7 +52,7 @@ function createBookCardElement(book) {
   return bookCardDiv;
 }
 
-// displayBook(myLibrary);
+displayBook(myLibrary);
 
 // addBookBtn.addEventListener("click", function (e) {
 //   e.preventDefault();

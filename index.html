@@ -19,21 +19,18 @@
       <main>
         <button class="add-book-btn">Add Book</button>
 
-        <div class="books-container">
-          <div class="book-card">
-            <p>Secret Home</p>
-            <p>Jackson</p>
-            <p>123</p>
-            <p>Yes</p>
-          </div>
-
-          <div class="book-card">
-            <p>Secret Home</p>
-            <p>Jackson</p>
-            <p>123</p>
-            <p>Yes</p>
+        <div class="modal">
+          <div class="modal-form-card">
+            <input type="text" placeholder="Title" required />
+            <input type="text" placeholder="Author" required />
+            <input type="text" placeholder="Pages" required />
+            <label for="read">Read:</label>
+            <input type="checkbox" name="read" />
+            <input type="submit" value="Add Book" />
           </div>
         </div>
+
+        <div class="books-container"></div>
       </main>
     </div>
 
