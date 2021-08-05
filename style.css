@@ -28,7 +28,7 @@ h1 {
   padding: 1em 0 0.5em 0;
 }
 
-.add-book-btn {
+.new-book-btn {
   display: block;
   margin: 0 auto 3em auto;
   padding: 0.5em 1em;
@@ -39,7 +39,7 @@ h1 {
 }
 
 .modal {
-  display: block;
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;

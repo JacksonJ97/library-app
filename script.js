@@ -1,8 +1,10 @@
+const newBookBtn = document.querySelector(".new-book-btn");
+const modal = document.querySelector(".modal");
+const addBookBtn = document.getElementById("add-book-btn");
 const titleInputElement = document.getElementById("title");
 const authorInputElement = document.getElementById("author");
 const pagesInputElement = document.getElementById("pages");
 const readInputElement = document.getElementById("read");
-const addBookBtn = document.getElementById("submit");
 const booksContainer = document.querySelector(".books-container");
 
 const book = new Book("Secret Home", "Jackson", 123, "yes");
@@ -54,8 +56,12 @@ function createBookCardElement(book) {
 
 displayBook(myLibrary);
 
-// addBookBtn.addEventListener("click", function (e) {
-//   e.preventDefault();
-//   addBookToLibrary();
-//   console.log(myLibrary);
-// });
+newBookBtn.addEventListener("click", function () {
+  modal.style.display = "block";
+});
+
+window.addEventListener("click", function (e) {
+  if (e.target == modal) {
+    modal.style.display = "none";
+  }
+});
