@@ -1,6 +1,5 @@
 const newBookBtn = document.querySelector(".new-book-btn");
 const modal = document.querySelector(".modal");
-// const addBookBtn = document.getElementById("add-book-btn");
 const form = document.getElementById("form");
 const titleInputElement = document.getElementById("title");
 const authorInputElement = document.getElementById("author");
@@ -9,6 +8,7 @@ const readInputElement = document.getElementById("read");
 const booksContainer = document.querySelector(".books-container");
 
 let myLibrary = [];
+let i = 0;
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -24,6 +24,7 @@ function addBookToLibrary() {
 
 function displayBook(array) {
   let bookCard = createBookCardElement(array[array.length - 1]);
+  bookCard.setAttribute("data-index", array.length - 1);
   booksContainer.append(bookCard);
 }
 
@@ -33,6 +34,7 @@ function createBookCardElement(book) {
   const bookAuthor = document.createElement("p");
   const bookPages = document.createElement("p");
   const bookRead = document.createElement("p");
+  const removeBtn = document.createElement("button");
 
   bookCardDiv.classList.add("book-card");
 
@@ -40,11 +42,25 @@ function createBookCardElement(book) {
   bookAuthor.textContent = book.author;
   bookPages.textContent = book.pages;
   bookRead.textContent = book.isRead;
+  removeBtn.textContent = "Remove";
+  removeBtn.classList.add("remove-btn");
 
   bookCardDiv.append(bookTitle);
   bookCardDiv.append(bookAuthor);
   bookCardDiv.append(bookPages);
   bookCardDiv.append(bookRead);
+  bookCardDiv.append(removeBtn);
+
+  removeBtn.addEventListener("click", function () {
+    const index = bookCardDiv.getAttribute("data-index");
+    myLibrary.splice(index, 1);
+    booksContainer.removeChild(bookCardDiv);
+    const booksContainerChildrenArr = Array.from(booksContainer.childNodes);
+
+    for (let i = 0; i < booksContainerChildrenArr.length; i++) {
+      booksContainerChildrenArr[i].setAttribute("data-index", i);
+    }
+  });
 
   return bookCardDiv;
 }
