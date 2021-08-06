@@ -8,7 +8,6 @@ const readInputElement = document.getElementById("read");
 const booksContainer = document.querySelector(".books-container");
 
 let myLibrary = [];
-let i = 0;
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -25,15 +24,41 @@ Book.prototype.toggleReadStatus = function () {
   }
 };
 
+function updateLocalStorage() {
+  localStorage.setItem("library", JSON.stringify(myLibrary));
+}
+
+if (localStorage.getItem("library") === null) {
+  myLibrary = [];
+} else {
+  let savedLibrary = JSON.parse(localStorage.getItem("library"));
+
+  for (let i = 0; i < savedLibrary.length; i++) {
+    const book = new Book(savedLibrary[i].title, savedLibrary[i].author, savedLibrary[i].pages, savedLibrary[i].isRead);
+    myLibrary.push(book);
+  }
+
+  displayBooks(myLibrary);
+}
+
 function addBookToLibrary() {
   const book = new Book(titleInputElement.value, authorInputElement.value, pagesInputElement.value, readInputElement.checked);
   myLibrary.push(book);
+  updateLocalStorage();
 }
 
-function displayBook(array) {
-  let bookCard = createBookCardElement(array[array.length - 1]);
-  bookCard.setAttribute("data-index", array.length - 1);
+function displayAddedBook(libraryArr) {
+  const bookCard = createBookCardElement(libraryArr[libraryArr.length - 1]);
+  bookCard.setAttribute("data-index", libraryArr.length - 1);
   booksContainer.append(bookCard);
+}
+
+function displayBooks(libraryArr) {
+  for (let i = 0; i < libraryArr.length; i++) {
+    const bookCard = createBookCardElement(libraryArr[i]);
+    bookCard.setAttribute("data-index", i);
+    booksContainer.append(bookCard);
+  }
 }
 
 function createBookCardElement(book) {
@@ -78,6 +103,8 @@ function createBookCardElement(book) {
       bookReadStatusBtn.textContent = "Not Read";
       bookReadStatusBtn.style.backgroundColor = "rgb(248, 125, 116)";
     }
+
+    updateLocalStorage();
   });
 
   removeBtn.addEventListener("click", function () {
@@ -89,6 +116,8 @@ function createBookCardElement(book) {
     for (let i = 0; i < booksContainerChildrenArr.length; i++) {
       booksContainerChildrenArr[i].setAttribute("data-index", i);
     }
+
+    updateLocalStorage();
   });
 
   return bookCardDiv;
@@ -108,13 +137,14 @@ newBookBtn.addEventListener("click", function () {
 window.addEventListener("click", function (e) {
   if (e.target == modal) {
     modal.style.display = "none";
+  } else if (e.target == form.lastElementChild) {
+    modal.style.display = "none";
   }
 });
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   addBookToLibrary();
-  displayBook(myLibrary);
   resetForm();
-  modal.style.display = "none";
+  displayAddedBook(myLibrary);
 });
