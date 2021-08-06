@@ -17,6 +17,14 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
+Book.prototype.toggleReadStatus = function () {
+  if (this.isRead) {
+    this.isRead = false;
+  } else {
+    this.isRead = true;
+  }
+};
+
 function addBookToLibrary() {
   const book = new Book(titleInputElement.value, authorInputElement.value, pagesInputElement.value, readInputElement.checked);
   myLibrary.push(book);
@@ -33,23 +41,44 @@ function createBookCardElement(book) {
   const bookTitle = document.createElement("p");
   const bookAuthor = document.createElement("p");
   const bookPages = document.createElement("p");
-  const bookRead = document.createElement("p");
+  const bookReadStatusBtn = document.createElement("button");
   const removeBtn = document.createElement("button");
 
+  bookReadStatusBtn.classList.add("book-read-status-btn");
   bookCardDiv.classList.add("book-card");
 
   bookTitle.textContent = book.title;
   bookAuthor.textContent = book.author;
   bookPages.textContent = book.pages;
-  bookRead.textContent = book.isRead;
+
+  if (book.isRead) {
+    bookReadStatusBtn.textContent = "Read";
+    bookReadStatusBtn.style.backgroundColor = "#5ceb09";
+  } else {
+    bookReadStatusBtn.textContent = "Not Read";
+    bookReadStatusBtn.style.backgroundColor = "rgb(248, 125, 116)";
+  }
+
   removeBtn.textContent = "Remove";
   removeBtn.classList.add("remove-btn");
 
   bookCardDiv.append(bookTitle);
   bookCardDiv.append(bookAuthor);
   bookCardDiv.append(bookPages);
-  bookCardDiv.append(bookRead);
+  bookCardDiv.append(bookReadStatusBtn);
   bookCardDiv.append(removeBtn);
+
+  bookReadStatusBtn.addEventListener("click", function () {
+    book.toggleReadStatus();
+
+    if (book.isRead) {
+      bookReadStatusBtn.textContent = "Read";
+      bookReadStatusBtn.style.backgroundColor = "#5ceb09";
+    } else {
+      bookReadStatusBtn.textContent = "Not Read";
+      bookReadStatusBtn.style.backgroundColor = "rgb(248, 125, 116)";
+    }
+  });
 
   removeBtn.addEventListener("click", function () {
     const index = bookCardDiv.getAttribute("data-index");
