@@ -9,20 +9,22 @@ const booksContainer = document.querySelector(".books-container");
 
 let myLibrary = [];
 
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-}
-
-Book.prototype.toggleReadStatus = function () {
-  if (this.isRead) {
-    this.isRead = false;
-  } else {
-    this.isRead = true;
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
   }
-};
+
+  toggleReadStatus() {
+    if (this.isRead) {
+      this.isRead = false;
+    } else {
+      this.isRead = true;
+    }
+  }
+}
 
 function updateLocalStorage() {
   localStorage.setItem("library", JSON.stringify(myLibrary));
