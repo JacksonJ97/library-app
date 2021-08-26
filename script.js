@@ -70,17 +70,17 @@ function createBookCardElement(book) {
   bookReadStatusBtn.classList.add("book-read-status-btn");
   removeBtn.classList.add("remove-btn");
 
-  bookTitle.textContent = book.title;
-  bookAuthor.textContent = book.author;
-  bookPages.textContent = book.pages;
+  bookTitle.textContent = `Title: ${book.title}`;
+  bookAuthor.textContent = `Author: ${book.author}`;
+  bookPages.textContent = `Pages: ${book.pages}`;
   removeBtn.textContent = "Remove";
 
   if (book.isRead) {
     bookReadStatusBtn.textContent = "Read";
-    bookReadStatusBtn.style.backgroundColor = "#5ceb09";
+    bookReadStatusBtn.style.backgroundColor = "#9CA5C7";
   } else {
     bookReadStatusBtn.textContent = "Not Read";
-    bookReadStatusBtn.style.backgroundColor = "rgb(248, 125, 116)";
+    bookReadStatusBtn.style.backgroundColor = "#FFFFFF";
   }
 
   bookCardDiv.append(bookTitle);
@@ -94,10 +94,10 @@ function createBookCardElement(book) {
 
     if (book.isRead) {
       bookReadStatusBtn.textContent = "Read";
-      bookReadStatusBtn.style.backgroundColor = "#5ceb09";
+      bookReadStatusBtn.style.backgroundColor = "#9CA5C7";
     } else {
       bookReadStatusBtn.textContent = "Not Read";
-      bookReadStatusBtn.style.backgroundColor = "rgb(248, 125, 116)";
+      bookReadStatusBtn.style.backgroundColor = "#FFFFFF";
     }
 
     updateLocalStorage();
@@ -141,6 +141,7 @@ form.addEventListener("submit", function (e) {
   addBookToLibrary();
   displayAddedBook(myLibrary);
   resetForm();
+  modal.style.display = "none";
 });
 
 // Event Listeners for the modal //
@@ -151,8 +152,6 @@ newBookBtn.addEventListener("click", function () {
 
 window.addEventListener("click", function (e) {
   if (e.target == modal) {
-    modal.style.display = "none";
-  } else if (e.target == form.lastElementChild) {
     modal.style.display = "none";
   }
 });
