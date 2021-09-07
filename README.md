@@ -4,7 +4,7 @@
 
 ### Built with
 - HTML5
-- CSS
+- CSS3
 - CSS Grid
 - JS
 
