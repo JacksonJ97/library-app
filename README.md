@@ -16,4 +16,4 @@ In this project, I learned how to setup a book class which is used to create the
 
 ### Live URL
 
-https://odin-library-delta.vercel.app/
+https://jacksonj97-library-app.vercel.app/
